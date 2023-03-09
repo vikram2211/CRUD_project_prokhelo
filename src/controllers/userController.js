@@ -109,7 +109,7 @@ const loginUser = async function (req, res) {
         userId: checkUser._id
     }, "secret_key");
 
-    return res.status(200).send({ status: true, message: "User logged-in sucessfully", token: token })
+    return res.status(200).send({ status: true, message: "User logged-in sucessfully", data: { _id: checkUser._id, token: token } })
 }
 
 
@@ -171,6 +171,7 @@ const getUsers = async function (req, res) {
         const usersData = await userModel.findById({ _id: userId }).select({ _id: 1, fname: 1, lname: 1, mobile: 1, email: 1 });
         return res.status(400).send({ status: false, message: "User data.", data: usersData });
     }
+    
 }
 
 module.exports.userRegister = userRegister;
